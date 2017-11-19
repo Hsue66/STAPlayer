@@ -19,6 +19,11 @@ class VideoViewController: UIViewController {
     
     var isPlaying = false
     var isBinaural = false
+    var isRecording = false
+    
+    var fileURL: URL!
+    var nowTime: Float64?
+    
     var vtitle: String?
     var vUrl: URL!
     
@@ -133,7 +138,7 @@ class VideoViewController: UIViewController {
         isPlaying = !isPlaying
     }
     
-    @objc func handleBinural(){
+    @objc func handleBinaural(){
         if isPlaying {
             isBinaural = !isBinaural
         }
@@ -148,12 +153,29 @@ class VideoViewController: UIViewController {
         }
     }
     
+    @objc func handleRecording(){
+        isRecording = !isRecording
+        if isRecording{
+            recBtn.tintColor = UIColor.red
+        }else{
+            recBtn.tintColor = UIColor.black
+            
+            var fileContents = ""
+            do {
+                fileContents = try String(contentsOf: fileURL)
+            } catch let error as NSError {
+                print("Error occured: \(fileURL), Error: " + error.localizedDescription)
+            }
+            print("Saved: \n \(fileContents)")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
         // set rightBarButtons
-        recBtn = UIBarButtonItem(title: "REC", style: .plain, target: self, action: #selector(handleBinural))
-        onOffBtn = UIBarButtonItem(title: "On", style: .plain, target: self, action: #selector(handleBinural))
+        recBtn = UIBarButtonItem(title: "REC", style: .plain, target: self, action: #selector(handleRecording))
+        onOffBtn = UIBarButtonItem(title: "On", style: .plain, target: self, action: #selector(handleBinaural))
         navigationItem.rightBarButtonItems = [onOffBtn, recBtn]
         
         // make navigationBar translucent
@@ -166,6 +188,22 @@ class VideoViewController: UIViewController {
             VideoTitle.title = TitleVal
         }
          */
+        
+        // generate recording file
+        let fileName = vtitle
+        let DocumentDirURL = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        
+        fileURL = DocumentDirURL.appendingPathComponent(fileName!).appendingPathExtension("txt")
+        print("FilePath: \(fileURL.path)")
+        
+        let writeStr = "time: 0.0, angle: 0.0\n"
+        do {
+            try writeStr.write(to: fileURL, atomically: true, encoding: String.Encoding.utf8)
+        } catch let error as NSError {
+            print("Error occured : \(fileURL), Error: " + error.localizedDescription)
+        }
+        
+        
         setPlayerView()
         
         //Erase After Check//////////////////////////////////////////////
@@ -230,6 +268,19 @@ class VideoViewController: UIViewController {
             }
         }
     }
+    
+    @objc private func writeValue(angle: CGFloat){
+        let saveInfo =   "time: \(nowTime!), angle: \(angle)\n"
+
+        do {
+            let fileHandle = try FileHandle(forWritingTo: fileURL)
+            fileHandle.seekToEndOfFile()
+            fileHandle.write(saveInfo.data(using: .utf8)!)
+            fileHandle.closeFile()
+        } catch {
+            print("Error occured : \(error)")
+        }
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         
@@ -242,11 +293,12 @@ class VideoViewController: UIViewController {
         let rect = view.frame
         let size = CGSize(width: 140.0, height: 140.0)
         
-        let joystick1Frame = CGRect(origin: CGPoint(x: (rect.width - size.width - 15.0), y:(rect.height-size.height-65.0)),size: size)
+        let joystick1Frame = CGRect(origin: CGPoint(x: (rect.width - size.width - 15.0), y:(rect.height-size.height-25.0)),size: size)
         joystick1 = JoyStickView(frame: joystick1Frame)
         joystick1.monitor = { angle, displacement in
             self.thetaLabel.text = "\(angle)"
             self.magnitudeLabel.text = "\(displacement)"
+            self.writeValue(angle: angle)
         }
         
         controlsContainerView.addSubview(joystick1)
@@ -290,8 +342,9 @@ class VideoViewController: UIViewController {
             if let duration = self.player.currentItem?.duration{
                 let durationSeconds = CMTimeGetSeconds(duration)
                 let seconds = CMTimeGetSeconds(progressTime)
+                self.nowTime = seconds
                 self.videoSlider.value = Float(seconds / durationSeconds)
-                //print("\(seconds)")
+                //print("\(self.nowTime)")
             }
         })
         
