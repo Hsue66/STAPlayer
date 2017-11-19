@@ -1,0 +1,361 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1715E39C1FB1BF82004B697B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1715E39B1FB1BF82004B697B /* AppDelegate.swift */; };
+		1715E39E1FB1BF82004B697B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1715E39D1FB1BF82004B697B /* ViewController.swift */; };
+		1715E3A11FB1BF82004B697B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1715E39F1FB1BF82004B697B /* Main.storyboard */; };
+		1715E3A31FB1BF82004B697B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1715E3A21FB1BF82004B697B /* Assets.xcassets */; };
+		1715E3A61FB1BF82004B697B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1715E3A41FB1BF82004B697B /* LaunchScreen.storyboard */; };
+		1715E3AE1FB1C059004B697B /* VideoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1715E3AD1FB1C059004B697B /* VideoTableViewController.swift */; };
+		1715E3B01FB1C076004B697B /* VideoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1715E3AF1FB1C076004B697B /* VideoTableViewCell.swift */; };
+		171634CC1FB86C360033F004 /* CoreGraphics+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171634CA1FB86C350033F004 /* CoreGraphics+Additions.swift */; };
+		171634CD1FB86C360033F004 /* JoyStickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171634CB1FB86C350033F004 /* JoyStickView.swift */; };
+		17E622131FB824BB009B10A1 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17E622121FB824BB009B10A1 /* VideoViewController.swift */; };
+		17EF70751FBA8660009AD087 /* VideoNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EF70741FBA8660009AD087 /* VideoNavigationController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1715E3981FB1BF82004B697B /* SimpleSTAPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimpleSTAPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1715E39B1FB1BF82004B697B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1715E39D1FB1BF82004B697B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1715E3A01FB1BF82004B697B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1715E3A21FB1BF82004B697B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1715E3A51FB1BF82004B697B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1715E3A71FB1BF82004B697B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1715E3AD1FB1C059004B697B /* VideoTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewController.swift; sourceTree = "<group>"; };
+		1715E3AF1FB1C076004B697B /* VideoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTableViewCell.swift; sourceTree = "<group>"; };
+		171634CA1FB86C350033F004 /* CoreGraphics+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreGraphics+Additions.swift"; sourceTree = "<group>"; };
+		171634CB1FB86C350033F004 /* JoyStickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoyStickView.swift; sourceTree = "<group>"; };
+		17E622121FB824BB009B10A1 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		17EF70741FBA8660009AD087 /* VideoNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoNavigationController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1715E3951FB1BF82004B697B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1715E38F1FB1BF82004B697B = {
+			isa = PBXGroup;
+			children = (
+				1715E39A1FB1BF82004B697B /* SimpleSTAPlayer */,
+				1715E3991FB1BF82004B697B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1715E3991FB1BF82004B697B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1715E3981FB1BF82004B697B /* SimpleSTAPlayer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1715E39A1FB1BF82004B697B /* SimpleSTAPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				171634CE1FB86C400033F004 /* JoyStick */,
+				1715E39B1FB1BF82004B697B /* AppDelegate.swift */,
+				1715E39D1FB1BF82004B697B /* ViewController.swift */,
+				17EF70741FBA8660009AD087 /* VideoNavigationController.swift */,
+				1715E39F1FB1BF82004B697B /* Main.storyboard */,
+				1715E3AF1FB1C076004B697B /* VideoTableViewCell.swift */,
+				1715E3AD1FB1C059004B697B /* VideoTableViewController.swift */,
+				17E622121FB824BB009B10A1 /* VideoViewController.swift */,
+				1715E3A21FB1BF82004B697B /* Assets.xcassets */,
+				1715E3A41FB1BF82004B697B /* LaunchScreen.storyboard */,
+				1715E3A71FB1BF82004B697B /* Info.plist */,
+			);
+			path = SimpleSTAPlayer;
+			sourceTree = "<group>";
+		};
+		171634CE1FB86C400033F004 /* JoyStick */ = {
+			isa = PBXGroup;
+			children = (
+				171634CA1FB86C350033F004 /* CoreGraphics+Additions.swift */,
+				171634CB1FB86C350033F004 /* JoyStickView.swift */,
+			);
+			path = JoyStick;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1715E3971FB1BF82004B697B /* SimpleSTAPlayer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1715E3AA1FB1BF82004B697B /* Build configuration list for PBXNativeTarget "SimpleSTAPlayer" */;
+			buildPhases = (
+				1715E3941FB1BF82004B697B /* Sources */,
+				1715E3951FB1BF82004B697B /* Frameworks */,
+				1715E3961FB1BF82004B697B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimpleSTAPlayer;
+			productName = SimpleSTAPlayer;
+			productReference = 1715E3981FB1BF82004B697B /* SimpleSTAPlayer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1715E3901FB1BF82004B697B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0910;
+				LastUpgradeCheck = 0910;
+				ORGANIZATIONNAME = "Sumin Hong";
+				TargetAttributes = {
+					1715E3971FB1BF82004B697B = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 1715E3931FB1BF82004B697B /* Build configuration list for PBXProject "SimpleSTAPlayer" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1715E38F1FB1BF82004B697B;
+			productRefGroup = 1715E3991FB1BF82004B697B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1715E3971FB1BF82004B697B /* SimpleSTAPlayer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1715E3961FB1BF82004B697B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1715E3A61FB1BF82004B697B /* LaunchScreen.storyboard in Resources */,
+				1715E3A31FB1BF82004B697B /* Assets.xcassets in Resources */,
+				1715E3A11FB1BF82004B697B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1715E3941FB1BF82004B697B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1715E39E1FB1BF82004B697B /* ViewController.swift in Sources */,
+				171634CD1FB86C360033F004 /* JoyStickView.swift in Sources */,
+				171634CC1FB86C360033F004 /* CoreGraphics+Additions.swift in Sources */,
+				1715E3B01FB1C076004B697B /* VideoTableViewCell.swift in Sources */,
+				1715E3AE1FB1C059004B697B /* VideoTableViewController.swift in Sources */,
+				17EF70751FBA8660009AD087 /* VideoNavigationController.swift in Sources */,
+				17E622131FB824BB009B10A1 /* VideoViewController.swift in Sources */,
+				1715E39C1FB1BF82004B697B /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		1715E39F1FB1BF82004B697B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1715E3A01FB1BF82004B697B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1715E3A41FB1BF82004B697B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1715E3A51FB1BF82004B697B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1715E3A81FB1BF82004B697B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1715E3A91FB1BF82004B697B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1715E3AB1FB1BF82004B697B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7KJDNC2AL2;
+				INFOPLIST_FILE = SimpleSTAPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hsue.SimpleSTAPlayer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1715E3AC1FB1BF82004B697B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7KJDNC2AL2;
+				INFOPLIST_FILE = SimpleSTAPlayer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.hsue.SimpleSTAPlayer;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1715E3931FB1BF82004B697B /* Build configuration list for PBXProject "SimpleSTAPlayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1715E3A81FB1BF82004B697B /* Debug */,
+				1715E3A91FB1BF82004B697B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1715E3AA1FB1BF82004B697B /* Build configuration list for PBXNativeTarget "SimpleSTAPlayer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1715E3AB1FB1BF82004B697B /* Debug */,
+				1715E3AC1FB1BF82004B697B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1715E3901FB1BF82004B697B /* Project object */;
+}
