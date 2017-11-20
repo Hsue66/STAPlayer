@@ -23,6 +23,8 @@ class VideoViewController: UIViewController {
     
     var fileURL: URL!
     var nowTime: Float64?
+    var nowAngle: CGFloat = 0.0
+    var nowElev: Float = 0
     
     var vtitle: String?
     var vUrl: URL!
@@ -133,8 +135,17 @@ class VideoViewController: UIViewController {
         
     }
     
+    // change nowElev value and record vlaue
     @objc func handleElevation(){
-        print(elevSlider.value)
+        var diff = false
+        if nowElev == elevSlider.value{
+            diff = true
+        }
+        nowElev = elevSlider.value
+        
+        if isRecording && !diff{
+            self.writeValue()
+        }
     }
     
     @objc func handlePause(){
@@ -182,7 +193,7 @@ class VideoViewController: UIViewController {
             } catch let error as NSError {
                 print("Error occured: \(fileURL), Error: " + error.localizedDescription)
             }
-            print("Saved: \n \(fileContents)")
+            print("Saved: \n\(fileContents)")
         }
     }
     
@@ -212,7 +223,7 @@ class VideoViewController: UIViewController {
         fileURL = DocumentDirURL.appendingPathComponent(fileName!).appendingPathExtension("txt")
         print("FilePath: \(fileURL.path)")
         
-        let writeStr = "time: 0.0, angle: 0.0\n"
+        let writeStr = "time: 0.0, angle: 0.0, elevation: 0.0\n"
         do {
             try writeStr.write(to: fileURL, atomically: true, encoding: String.Encoding.utf8)
         } catch let error as NSError {
@@ -293,8 +304,8 @@ class VideoViewController: UIViewController {
         }
     }
     
-    @objc private func writeValue(angle: CGFloat){
-        let saveInfo =   "time: \(nowTime!), angle: \(angle)\n"
+    @objc private func writeValue(){
+        let saveInfo =   "time: \(nowTime!), angle: \(nowAngle), elevation: \(nowElev)\n"
 
         do {
             let fileHandle = try FileHandle(forWritingTo: fileURL)
@@ -321,7 +332,10 @@ class VideoViewController: UIViewController {
         joystick1.monitor = { angle, displacement in
             self.thetaLabel.text = "\(angle)"
             self.magnitudeLabel.text = "\(displacement)"
-            self.writeValue(angle: angle)
+            self.nowAngle = angle
+            if self.isRecording{
+                self.writeValue()
+            }
         }
         
         controlsContainerView.addSubview(joystick1)
