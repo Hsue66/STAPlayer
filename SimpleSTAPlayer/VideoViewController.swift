@@ -104,7 +104,7 @@ class VideoViewController: UIViewController {
     }()
     
     //Erase After Check//////////////////////////////////////////////
-    let magnitudeLabel: UILabel = {
+    let thetaLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "0.0"
@@ -114,7 +114,7 @@ class VideoViewController: UIViewController {
         return label
     }()
     
-    let thetaLabel: UILabel = {
+    let elevLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "0.0"
@@ -142,9 +142,10 @@ class VideoViewController: UIViewController {
             diff = true
         }
         nowElev = elevSlider.value
+        elevLabel.text = "\(nowElev)"
         
         if isRecording && !diff{
-            self.writeValue()
+            writeValue()
         }
     }
     
@@ -152,6 +153,7 @@ class VideoViewController: UIViewController {
         if isPlaying{
             player.pause()
             playPressedButton.setImage(UIImage(named: "play"), for: .normal)
+            playPressedButton.isHidden = false
             
             // automatic Binaural off
             joystick1.resetPosition()
@@ -161,6 +163,7 @@ class VideoViewController: UIViewController {
         }else{
             player.play()
             playPressedButton.setImage(UIImage(named: "pause"), for: .normal)
+            playPressedButton.isHidden = true
         }
         isPlaying = !isPlaying
     }
@@ -185,7 +188,7 @@ class VideoViewController: UIViewController {
         if isRecording{
             recBtn.tintColor = UIColor.red
         }else{
-            recBtn.tintColor = UIColor.black
+            recBtn.tintColor = self.view.tintColor
             
             var fileContents = ""
             do {
@@ -197,9 +200,31 @@ class VideoViewController: UIViewController {
         }
     }
     
+    @objc func popupPlayIcons(recognizer: UITapGestureRecognizer){
+        print("touched")
+        if playPressedButton.isHidden{
+            playPressedButton.isHidden = false
+            if isPlaying{
+                Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(disappearPlayBtn), userInfo: self, repeats: false)
+            }
+        }
+    }
+    
+    @objc func disappearPlayBtn(){
+        if isPlaying{
+            playPressedButton.isHidden = true
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        // add tapGesture
+        let tapRecognizer = UITapGestureRecognizer(target:self, action:#selector(popupPlayIcons))
+        tapRecognizer.numberOfTapsRequired = 1
+        VideoView.isUserInteractionEnabled = true
+        VideoView.addGestureRecognizer(tapRecognizer)
+        
         // set rightBarButtons
         recBtn = UIBarButtonItem(title: "REC", style: .plain, target: self, action: #selector(handleRecording))
         onOffBtn = UIBarButtonItem(title: "On", style: .plain, target: self, action: #selector(handleBinaural))
@@ -234,15 +259,15 @@ class VideoViewController: UIViewController {
         setPlayerView()
         
         //Erase After Check//////////////////////////////////////////////
-        controlsContainerView.addSubview(magnitudeLabel)
-        magnitudeLabel.rightAnchor.constraint(equalTo: controlsContainerView.rightAnchor).isActive = true
-        magnitudeLabel.topAnchor.constraint(equalTo: controlsContainerView.topAnchor, constant: 30).isActive = true
-        magnitudeLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        magnitudeLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        controlsContainerView.addSubview(elevLabel)
+        elevLabel.rightAnchor.constraint(equalTo: controlsContainerView.rightAnchor).isActive = true
+        elevLabel.topAnchor.constraint(equalTo: controlsContainerView.topAnchor, constant: 30).isActive = true
+        elevLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        elevLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         controlsContainerView.addSubview(thetaLabel)
         thetaLabel.rightAnchor.constraint(equalTo: controlsContainerView.rightAnchor).isActive = true
-        thetaLabel.topAnchor.constraint(equalTo: magnitudeLabel.bottomAnchor, constant: 4).isActive = true
+        thetaLabel.topAnchor.constraint(equalTo: elevLabel.bottomAnchor, constant: 4).isActive = true
         thetaLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         thetaLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         //Erase After Check//////////////////////////////////////////////
@@ -288,7 +313,7 @@ class VideoViewController: UIViewController {
         elevSlider.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))
         elevSlider.widthAnchor.constraint(equalToConstant: view.frame.height - 140 ).isActive = true
         elevSlider.centerYAnchor.constraint(equalTo: controlsContainerView.centerYAnchor).isActive = true
-        elevSlider.leftAnchor.constraint(equalTo: controlsContainerView.leftAnchor, constant: -100).isActive = true
+        elevSlider.leftAnchor.constraint(equalTo: controlsContainerView.leftAnchor, constant: -110).isActive = true
     
         VideoView.addSubview(controlsContainerView)
     }
@@ -331,7 +356,7 @@ class VideoViewController: UIViewController {
         joystick1 = JoyStickView(frame: joystick1Frame)
         joystick1.monitor = { angle, displacement in
             self.thetaLabel.text = "\(angle)"
-            self.magnitudeLabel.text = "\(displacement)"
+            //self.magnitudeLabel.text = "\(displacement)"
             self.nowAngle = angle
             if self.isRecording{
                 self.writeValue()
