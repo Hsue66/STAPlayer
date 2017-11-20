@@ -80,6 +80,18 @@ class VideoViewController: UIViewController {
         return label
     }()
     
+    // set elevation Slider
+    let elevSlider: UISlider = {
+        let slider = UISlider()
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.setThumbImage(UIImage(named: "circle"), for: .normal)
+        slider.maximumTrackTintColor = .white
+        slider.maximumValue = 90
+        slider.minimumValue = 0
+        slider.addTarget(self, action: #selector(handleElevation), for: .valueChanged)
+        return slider
+    }()
+    
     let videoSlider: UISlider = {
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
@@ -119,6 +131,10 @@ class VideoViewController: UIViewController {
             })
         }
         
+    }
+    
+    @objc func handleElevation(){
+        print(elevSlider.value)
     }
     
     @objc func handlePause(){
@@ -208,13 +224,13 @@ class VideoViewController: UIViewController {
         
         //Erase After Check//////////////////////////////////////////////
         controlsContainerView.addSubview(magnitudeLabel)
-        magnitudeLabel.leftAnchor.constraint(equalTo: controlsContainerView.leftAnchor).isActive = true
+        magnitudeLabel.rightAnchor.constraint(equalTo: controlsContainerView.rightAnchor).isActive = true
         magnitudeLabel.topAnchor.constraint(equalTo: controlsContainerView.topAnchor, constant: 30).isActive = true
         magnitudeLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         magnitudeLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         
         controlsContainerView.addSubview(thetaLabel)
-        thetaLabel.leftAnchor.constraint(equalTo: controlsContainerView.leftAnchor).isActive = true
+        thetaLabel.rightAnchor.constraint(equalTo: controlsContainerView.rightAnchor).isActive = true
         thetaLabel.topAnchor.constraint(equalTo: magnitudeLabel.bottomAnchor, constant: 4).isActive = true
         thetaLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         thetaLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
@@ -255,6 +271,14 @@ class VideoViewController: UIViewController {
         videoSlider.leftAnchor.constraint(equalTo: currentTimeLabel.rightAnchor, constant: 4).isActive = true
         videoSlider.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
+        
+        controlsContainerView.addSubview(elevSlider)
+        elevSlider.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        elevSlider.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2))
+        elevSlider.widthAnchor.constraint(equalToConstant: view.frame.height - 140 ).isActive = true
+        elevSlider.centerYAnchor.constraint(equalTo: controlsContainerView.centerYAnchor).isActive = true
+        elevSlider.leftAnchor.constraint(equalTo: controlsContainerView.leftAnchor, constant: -100).isActive = true
+    
         VideoView.addSubview(controlsContainerView)
     }
     
@@ -282,11 +306,10 @@ class VideoViewController: UIViewController {
         }
     }
 
+    
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(animated)
-        
-        //navigationController?.setNavigationBarHidden(true, animated: false)
         
         // Create 'fixed' joystick
         //
