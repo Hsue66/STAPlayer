@@ -22,7 +22,8 @@ class VideoViewController: UIViewController {
     var isRecording = false
     
     var fileURL: URL!
-    var nowTime: Float64?
+    var nowTime: Float64 = 0.0
+    var beforeTime: Float64 = 0.0
     var nowAngle: CGFloat = 0.0
     var nowElev: Float = 0
     
@@ -57,7 +58,6 @@ class VideoViewController: UIViewController {
         button.setImage(image, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.tintColor = .white
-        //button.isHidden = true
         button.addTarget(self, action: #selector(handlePause), for: .touchUpInside)
         return button
     }()
@@ -90,6 +90,7 @@ class VideoViewController: UIViewController {
         slider.maximumTrackTintColor = .white
         slider.maximumValue = 90
         slider.minimumValue = 0
+        slider.isEnabled = false
         slider.addTarget(self, action: #selector(handleElevation), for: .valueChanged)
         return slider
     }()
@@ -138,10 +139,10 @@ class VideoViewController: UIViewController {
     // change nowElev value and record vlaue
     @objc func handleElevation(){
         var diff = false
-        if nowElev == elevSlider.value{
+        if nowElev == floor(elevSlider.value){
             diff = true
         }
-        nowElev = elevSlider.value
+        nowElev = floor(elevSlider.value)
         elevLabel.text = "\(nowElev)"
         
         if isRecording && !diff{
@@ -155,11 +156,12 @@ class VideoViewController: UIViewController {
             playPressedButton.setImage(UIImage(named: "play"), for: .normal)
             playPressedButton.isHidden = false
             
+            /*
             // automatic Binaural off
-            joystick1.resetPosition()
             joystick1.onoff = false
             onOffBtn.title = "On"
             isBinaural = false
+             */
         }else{
             player.play()
             playPressedButton.setImage(UIImage(named: "pause"), for: .normal)
@@ -169,17 +171,24 @@ class VideoViewController: UIViewController {
     }
     
     @objc func handleBinaural(){
+        /*
         if isPlaying {
             isBinaural = !isBinaural
         }
+         */
         
+        isBinaural = !isBinaural
         if isBinaural{
             joystick1.onoff = true
+            joystick1.alpha = 1
             onOffBtn.title = "Off"
+            elevSlider.isEnabled = true
         }else{
-            joystick1.resetPosition()
+            //joystick1.resetPosition()
+            joystick1.alpha = 0.5
             joystick1.onoff = false
             onOffBtn.title = "On"
+            elevSlider.isEnabled = false
         }
     }
     
@@ -330,15 +339,18 @@ class VideoViewController: UIViewController {
     }
     
     @objc private func writeValue(){
-        let saveInfo =   "time: \(nowTime!), angle: \(nowAngle), elevation: \(nowElev)\n"
-
-        do {
-            let fileHandle = try FileHandle(forWritingTo: fileURL)
-            fileHandle.seekToEndOfFile()
-            fileHandle.write(saveInfo.data(using: .utf8)!)
-            fileHandle.closeFile()
-        } catch {
-            print("Error occured : \(error)")
+        if beforeTime != nowTime{
+            beforeTime = nowTime
+            let saveInfo =   "time: \(nowTime), angle: \(nowAngle), elevation: \(nowElev)\n"
+            
+            do {
+                let fileHandle = try FileHandle(forWritingTo: fileURL)
+                fileHandle.seekToEndOfFile()
+                fileHandle.write(saveInfo.data(using: .utf8)!)
+                fileHandle.closeFile()
+            } catch {
+                print("Error occured : \(error)")
+            }
         }
     }
 
@@ -355,10 +367,15 @@ class VideoViewController: UIViewController {
         let joystick1Frame = CGRect(origin: CGPoint(x: (rect.width - size.width - 15.0), y:(rect.height-size.height-25.0)),size: size)
         joystick1 = JoyStickView(frame: joystick1Frame)
         joystick1.monitor = { angle, displacement in
-            self.thetaLabel.text = "\(angle)"
+            self.thetaLabel.text = "\(floor(angle))"
             //self.magnitudeLabel.text = "\(displacement)"
-            self.nowAngle = angle
-            if self.isRecording{
+            
+            var diff = false
+            if self.nowAngle == floor(angle){
+                diff = true
+            }
+            self.nowAngle = floor(angle)
+            if self.isRecording && !diff{
                 self.writeValue()
             }
         }
@@ -372,11 +389,9 @@ class VideoViewController: UIViewController {
             joystick1.onoff = false
         }
         joystick1.movable = false
-        joystick1.alpha = 1.0
+        joystick1.alpha = 0.5
         joystick1.baseAlpha = 0.5 // let the background bleed thru the base
-        joystick1.handleTintColor = UIColor.blue // Colorize the handle
-        
-        
+        joystick1.handleTintColor = self.view.tintColor //UIColor.blue // Colorize the handle
     }
     
     override func didReceiveMemoryWarning() {
@@ -404,9 +419,9 @@ class VideoViewController: UIViewController {
             if let duration = self.player.currentItem?.duration{
                 let durationSeconds = CMTimeGetSeconds(duration)
                 let seconds = CMTimeGetSeconds(progressTime)
-                self.nowTime = seconds
+                self.nowTime = floor(seconds/0.001)*0.001
+                print("\(self.nowTime)")
                 self.videoSlider.value = Float(seconds / durationSeconds)
-                //print("\(self.nowTime)")
             }
         })
         
@@ -440,15 +455,5 @@ class VideoViewController: UIViewController {
             return String(format: "%02i:%02i", arguments: [minutes,seconds])
         }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
