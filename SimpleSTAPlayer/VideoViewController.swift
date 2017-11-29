@@ -195,10 +195,11 @@ class VideoViewController: UIViewController {
     @objc func handleRecording(){
         isRecording = !isRecording
         if isRecording{
+            print("rec---")
             recBtn.tintColor = UIColor.red
         }else{
             recBtn.tintColor = self.view.tintColor
-            
+            print("reccDONE---")
             var fileContents = ""
             do {
                 fileContents = try String(contentsOf: fileURL)
@@ -412,7 +413,7 @@ class VideoViewController: UIViewController {
         player = AVPlayer(url: vUrl)
         
         player.currentItem?.addObserver(self, forKeyPath: "duration", options: [.new,.initial], context: nil)
-        let interval = CMTime(value:1, timescale:1)
+        let interval = CMTime(value:1, timescale:1000)
         player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main , using: {(progressTime) in
             self.currentTimeLabel.text = self.getTimeString(from: progressTime)
             
@@ -420,7 +421,7 @@ class VideoViewController: UIViewController {
                 let durationSeconds = CMTimeGetSeconds(duration)
                 let seconds = CMTimeGetSeconds(progressTime)
                 self.nowTime = floor(seconds/0.001)*0.001
-                print("\(self.nowTime)")
+                //print("\(seconds) : \(self.nowTime)")
                 self.videoSlider.value = Float(seconds / durationSeconds)
             }
         })
