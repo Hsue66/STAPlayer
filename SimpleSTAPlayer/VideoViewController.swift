@@ -195,11 +195,11 @@ class VideoViewController: UIViewController {
     @objc func handleRecording(){
         isRecording = !isRecording
         if isRecording{
-            print("rec---")
+            //print("rec---")
             recBtn.tintColor = UIColor.red
         }else{
             recBtn.tintColor = self.view.tintColor
-            print("reccDONE---")
+            //print("reccDONE---")
             var fileContents = ""
             do {
                 fileContents = try String(contentsOf: fileURL)
